@@ -7,32 +7,26 @@
  */
 
 import React, { Component } from 'react';
-import {
+import { StyleSheet, View, ImageBackground } from 'react-native';
 
-  StyleSheet,
-
-  View,
-
-
-
-} from 'react-native';
-
-import {
-  Colors,
-
-} from 'react-native/Libraries/NewAppScreen';
+import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Quote from './components/Quote';
+import { tsUndefinedKeyword } from '@babel/types';
 
 const { quotes } = require('./quotes.json');
+const bg = require('./assets/bg.png')
 
 class App extends Component {
 
   render() {
     const quote = quotes[1]
     return (
-      <View style={styles.sectionContainer}>
-        <Quote text={quote.text} source={quote.source}></Quote>
-      </View>
+      <ImageBackground source={bg} style={styles.backgroundContainer}>
+        <View style={styles.container}>
+          <Quote text={quote.text} source={quote.source}></Quote>
+        </View>
+      </ImageBackground>
+
     )
   }
 }
@@ -40,42 +34,17 @@ class App extends Component {
 
 
 const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: Colors.lighter,
+  backgroundContainer: {
+    flex: 1,
+    resizeMode: 'cover',
+    width: undefined,
+    height: undefined
   },
-  engine: {
-    position: 'absolute',
-    right: 0,
-  },
-  body: {
-    backgroundColor: Colors.white,
-  },
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-    color: Colors.black,
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-    color: Colors.dark,
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-  footer: {
-    color: Colors.dark,
-    fontSize: 12,
-    fontWeight: '600',
-    padding: 4,
-    paddingRight: 12,
-    textAlign: 'right',
-  },
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 });
 
 
