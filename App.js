@@ -6,32 +6,38 @@
  * @flow
  */
 
-import React, { Fragment } from 'react';
+import React, { Component } from 'react';
 import {
-  SafeAreaView,
+
   StyleSheet,
-  ScrollView,
+
   View,
-  Text,
-  StatusBar,
+
+
+
 } from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
-  DebugInstructions,
-  ReloadInstructions,
+
 } from 'react-native/Libraries/NewAppScreen';
 import Quote from './components/Quote';
 
-const App = () => {
-  return (
-    <View style={styles.sectionContainer}>
-      <Quote hello={"hola mundo!"}></Quote>
-    </View>
-  );
-};
+const { quotes } = require('./quotes.json');
+
+class App extends Component {
+
+  render() {
+    const quote = quotes[1]
+    return (
+      <View style={styles.sectionContainer}>
+        <Quote text={quote.text} source={quote.source}></Quote>
+      </View>
+    )
+  }
+}
+
+
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -71,5 +77,6 @@ const styles = StyleSheet.create({
     textAlign: 'right',
   },
 });
+
 
 export default App;
