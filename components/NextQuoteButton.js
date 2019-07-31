@@ -18,3 +18,5 @@ NextQuoteButton.propTypes = {
   onPress: PropTypes.func.isRequired
 }
 
+export default NextQuoteButton;
+
