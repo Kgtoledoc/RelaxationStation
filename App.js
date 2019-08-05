@@ -7,7 +7,7 @@
  */
 
 import React, { Component } from 'react';
-import { StyleSheet, View, ImageBackground } from 'react-native';
+import { StyleSheet, View, ImageBackground, LayoutAnimation } from 'react-native';
 
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 import Quote from './components/Quote';
@@ -17,6 +17,26 @@ import NextQuoteButton from './components/NextQuoteButton'
 
 const { quotes } = require('./quotes.json');
 const bg = require('./assets/bg.png')
+
+const tranquil = {
+  duration: 500,
+  create: {
+    duration: 1000,
+    delay: 300,
+    type: LayoutAnimation.Types.easeIn,
+    property: LayoutAnimation.Properties.opacity,
+  },
+  update: {
+    type: LayoutAnimation.Types.easeInEaseOut,
+    property: LayoutAnimation.Properties.opacity,
+  },
+  delete: {
+    duration: 200,
+    type: LayoutAnimation.Types.easeOut,
+    property: LayoutAnimation.Properties.opacity,
+  }
+
+}
 
 class App extends Component {
   constructor(props) {
@@ -39,6 +59,9 @@ class App extends Component {
       quoteIndex: newIndex
     })
   }
+  componentWillUpdate() {
+    LayoutAnimation.configureNext(tranquil)
+  }
 
   render() {
 
@@ -46,7 +69,10 @@ class App extends Component {
     return (
       <ImageBackground source={bg} style={styles.backgroundContainer}>
         <View style={styles.container}>
-          <Quote text={quote.text} source={quote.source}></Quote>
+          <Quote
+            key={this.state.quoteIndex}
+            text={quote.text}
+            source={quote.source}></Quote>
           <NextQuoteButton onPress={this._incrementQuoteIndex}></NextQuoteButton>
         </View>
       </ImageBackground>
